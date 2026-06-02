@@ -14,6 +14,7 @@ Every line ships in a static binary. Every release passes a structured security 
 | [Runbound](https://github.com/redlemonbe/Runbound) | DNS server | Drop-in Unbound replacement — XDP fast-path, REST API, master/slave replication, web dashboard | AGPL-3.0 + Commercial |
 | [RunNginx](https://github.com/redlemonbe/RunNginx) | HTTP server | nginx-compatible — SIMD parser, AF/XDP, io_uring, built-in SSH/SFTP engine, web dashboard | AGPL-3.0 + Commercial |
 | [RunAlexDB](https://github.com/redlemonbe/RunAlexDB) | SQL database | MariaDB-compatible wire protocol — in-memory engine, XDP fast-path, built-in admin UI | AGPL-3.0 + Commercial |
+| [RunX540](https://github.com/redlemonbe/RunX540) | Proxmox NIC | XDP-capable emulated NIC for Proxmox VE guests — native XDP_DRV on the stock vmxnet3, bounded backpressure, no special hardware | AGPL-3.0 + Commercial |
 | [dnsmark](https://github.com/redlemonbe/dnsmark) | DNS benchmark | DNS benchmark tool — UDP/TCP/DoT/DoH, percentiles, compare mode, JSON output | AGPL-3.0 |
 | [httpmark](https://github.com/redlemonbe/httpmark) | HTTP benchmark | HTTP/HTTPS benchmark tool — QPS control, HTTP/2, compare mode, JSON output | AGPL-3.0 |
 | [dbmark](https://github.com/redlemonbe/dbmark) | DB benchmark | Database benchmark tool — MySQL protocol, latency percentiles, compare mode | AGPL-3.0 |
@@ -63,6 +64,7 @@ XDP runs in SKB mode if the NIC doesn't support DRV mode (e.g. virtio-net). The 
 | Runbound | v0.9.41 | Experimental — not yet production-recommended |
 | RunNginx | v0.1.5 | Experimental — not yet production-recommended |
 | RunAlexDB | v0.1.0 | Alpha — in-memory only, persistence roadmapped |
+| RunX540 | v0.1.1 | PoC — XDP correctness proven, not yet benchmarked |
 | dnsmark | v0.1.1 | Stable |
 | httpmark | v0.1.1 | Stable |
 | dbmark | v0.1.0 | In development |
@@ -73,7 +75,7 @@ XDP runs in SKB mode if the NIC doesn't support DRV mode (e.g. virtio-net). The 
 
 ## Commercial licensing
 
-Runbound, RunNginx, and RunAlexDB are dual-licensed:
+Runbound, RunNginx, RunAlexDB, and RunX540 are dual-licensed:
 
 - **AGPL-3.0** — free for open-source projects, self-hosted personal use, academic research, and community distributions (Debian, Ubuntu, etc.)
 - **Commercial license** — for organizations that need to deploy without AGPL obligations (SaaS, proprietary integrations, OEM)
