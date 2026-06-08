@@ -12,22 +12,20 @@ Every line ships in a static binary. Every release passes a structured security 
 | Project | Type | Description | License |
 |---------|------|-------------|---------|
 | [Runbound](https://github.com/redlemonbe/Runbound) | DNS server | Drop-in Unbound replacement — XDP fast-path, REST API, master/slave replication, web dashboard | AGPL-3.0 + Commercial |
-| [RunNginx](https://github.com/redlemonbe/RunNginx) | HTTP server | nginx-compatible — SIMD parser, AF/XDP, io_uring, built-in SSH/SFTP engine, web dashboard | AGPL-3.0 + Commercial |
 | [RunAlexDB](https://github.com/redlemonbe/RunAlexDB) | SQL database | MariaDB-compatible wire protocol — in-memory engine, XDP fast-path, built-in admin UI | AGPL-3.0 + Commercial |
-| [RunX540](https://github.com/redlemonbe/RunX540) | Proxmox NIC | XDP-capable emulated NIC for Proxmox VE guests — native XDP_DRV on the stock vmxnet3, bounded backpressure, no special hardware | AGPL-3.0 + Commercial |
+| [RunX540](https://github.com/redlemonbe/RunX540) | Proxmox datapath | Host-side XDP datapath for Proxmox VMs — 10 GbE line-rate VM→external, same-host VM↔VM in RAM, zero-config, no SR-IOV / passthrough | AGPL-3.0 + Commercial |
 | [dnsmark](https://github.com/redlemonbe/dnsmark) | DNS benchmark | DNS benchmark tool — UDP/TCP/DoT/DoH, percentiles, compare mode, JSON output | AGPL-3.0 |
-| [httpmark](https://github.com/redlemonbe/httpmark) | HTTP benchmark | HTTP/HTTPS benchmark tool — QPS control, HTTP/2, compare mode, JSON output | AGPL-3.0 |
-| [dbmark](https://github.com/redlemonbe/dbmark) | DB benchmark | Database benchmark tool — MySQL protocol, latency percentiles, compare mode | AGPL-3.0 |
+| [RunPerf](https://github.com/redlemonbe/RunPerf) | Network benchmark | TCP/UDP throughput & packet-rate generator — AF_XDP line-rate, per-CPU + REUSEPORT, JSON output | AGPL-3.0 |
 
 ---
 
 ## Design principles
 
-**Military-grade security** — structured audits every release cycle, multi-source methodology ([AI-INTERNAL] + [AI-ADVERSARIAL] + [AUTOMATED-TOOL]), findings tracked to resolution, no release without a clean audit pass.
+**Structured security audits** — multi-cycle reviews every release, multi-source methodology ([AI-INTERNAL] + [AI-ADVERSARIAL] + [AUTOMATED-TOOL]), findings tracked to resolution, no release without a clean audit pass.
 
 **Extreme performance** — SIMD dispatch at startup (AVX2 → SSE2 → scalar), AF/XDP kernel-bypass where the NIC supports it, io_uring for zero-copy file I/O, lockless data paths on hot paths.
 
-**Drop-in compatibility** — existing `unbound.conf` and `nginx.conf` files work as-is. Non-standard directives are ignored gracefully. You migrate by dropping in the binary.
+**Drop-in compatibility** — existing `unbound.conf` files work as-is. Non-standard directives are ignored gracefully. You migrate by dropping in the binary.
 
 **Operability** — live config reload without restart, REST API on every service, built-in browser dashboard with no external dependencies, structured JSON logs, Prometheus endpoints.
 
@@ -61,13 +59,11 @@ XDP runs in SKB mode if the NIC doesn't support DRV mode (e.g. virtio-net). The 
 
 | Project | Version | Status |
 |---------|---------|--------|
-| Runbound | v0.9.41 | Experimental — not yet production-recommended |
-| RunNginx | v0.1.5 | Experimental — not yet production-recommended |
-| RunAlexDB | v0.1.0 | Alpha — in-memory only, persistence roadmapped |
-| RunX540 | v0.1.1 | PoC — XDP correctness proven, not yet benchmarked |
-| dnsmark | v0.1.1 | Stable |
-| httpmark | v0.1.1 | Stable |
-| dbmark | v0.1.0 | In development |
+| Runbound | v0.16.7 | Experimental — not yet production-recommended |
+| RunAlexDB | v0.3.25 | Alpha — in-memory engine |
+| RunX540 | v1.0.0 | Audited (8 cycles incl. cross-review + live host); proven on 10G |
+| dnsmark | v2.1.3 | Stable |
+| RunPerf | v0.1.0 | Early — AF_XDP line-rate generation proven |
 
 > ⚠️ All server software is under active development and has not yet undergone external human security audit. Not recommended for production deployments handling sensitive traffic until v1.0.
 
@@ -75,14 +71,14 @@ XDP runs in SKB mode if the NIC doesn't support DRV mode (e.g. virtio-net). The 
 
 ## Commercial licensing
 
-Runbound, RunNginx, RunAlexDB, and RunX540 are dual-licensed:
+Runbound, RunAlexDB, and RunX540 are dual-licensed:
 
 - **AGPL-3.0** — free for open-source projects, self-hosted personal use, academic research, and community distributions (Debian, Ubuntu, etc.)
 - **Commercial license** — for organizations that need to deploy without AGPL obligations (SaaS, proprietary integrations, OEM)
 
 Contact: redlemonbe@codix.be
 
-dnsmark, httpmark, and dbmark are AGPL-3.0 only — no commercial license needed for benchmark tools.
+dnsmark and RunPerf are AGPL-3.0 only — no commercial license needed for benchmark tools.
 
 ---
 
