@@ -58,7 +58,7 @@ XDP runs in SKB mode if the NIC doesn't support DRV mode (e.g. virtio-net). The 
 
 | Project | Version | Status |
 |---------|---------|--------|
-| Runbound | v0.16.7 | Experimental — not yet production-recommended |
+| Runbound | v0.16.7 | Stable |
 | RunX540 | v1.0.0 | Audited (8 cycles incl. cross-review + live host); proven on 10G |
 | dnsmark | v2.1.3 | Stable |
 | RunPerf | v0.1.0 | Early — AF_XDP line-rate generation proven |
@@ -69,7 +69,7 @@ XDP runs in SKB mode if the NIC doesn't support DRV mode (e.g. virtio-net). The 
 
 ## Commercial licensing
 
-Runbound, RunAlexDB, and RunX540 are dual-licensed:
+Runbound and RunX540 are dual-licensed:
 
 - **AGPL-3.0** — free for open-source projects, self-hosted personal use, academic research, and community distributions (Debian, Ubuntu, etc.)
 - **Commercial license** — for organizations that need to deploy without AGPL obligations (SaaS, proprietary integrations, OEM)
