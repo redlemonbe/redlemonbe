@@ -87,8 +87,10 @@ dnsmark and RunPerf are AGPL-3.0 only — no commercial license needed for bench
 **Bitcoin** — `3FP8hkkiu4kwCD1PDFgAv2oq1ZTyXwy3yy`  
 **Ethereum** — `0xB5eEAf89edA4204Aa9305B068b37A93439cBb680`
 
-Security issues: redlemonbe@codix.be — private disclosure before opening a public issue.
-
 ---
 
-`Rust` `SIMD` `XDP` `AF_XDP` `io_uring` `DNS` `HTTP` `SQL` `Linux` `Networking` `Performance` `Security`
+## License
+
+AGPL v3 — see [LICENSE](LICENSE). Commercial license available for organizations that need to deploy without AGPL obligations: [COMMERCIAL_LICENSE.md](COMMERCIAL_LICENSE.md).
+
+---
