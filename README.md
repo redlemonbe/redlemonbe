@@ -12,7 +12,6 @@ Every line ships in a static binary. Every release passes a structured security 
 | Project | Type | Description | License |
 |---------|------|-------------|---------|
 | [Runbound](https://github.com/redlemonbe/Runbound) | DNS server | Drop-in Unbound replacement — XDP fast-path, REST API, master/slave replication, web dashboard | AGPL-3.0 + Commercial |
-| [RunAlexDB](https://github.com/redlemonbe/RunAlexDB) | SQL database | MariaDB-compatible wire protocol — in-memory engine, XDP fast-path, built-in admin UI | AGPL-3.0 + Commercial |
 | [RunX540](https://github.com/redlemonbe/RunX540) | Proxmox datapath | Host-side XDP datapath for Proxmox VMs — 10 GbE line-rate VM→external, same-host VM↔VM in RAM, zero-config, no SR-IOV / passthrough | AGPL-3.0 + Commercial |
 | [dnsmark](https://github.com/redlemonbe/dnsmark) | DNS benchmark | DNS benchmark tool — UDP/TCP/DoT/DoH, percentiles, compare mode, JSON output | AGPL-3.0 |
 | [RunPerf](https://github.com/redlemonbe/RunPerf) | Network benchmark | TCP/UDP throughput & packet-rate generator — AF_XDP line-rate, per-CPU + REUSEPORT, JSON output | AGPL-3.0 |
@@ -60,7 +59,6 @@ XDP runs in SKB mode if the NIC doesn't support DRV mode (e.g. virtio-net). The 
 | Project | Version | Status |
 |---------|---------|--------|
 | Runbound | v0.16.7 | Experimental — not yet production-recommended |
-| RunAlexDB | v0.3.25 | Alpha — in-memory engine |
 | RunX540 | v1.0.0 | Audited (8 cycles incl. cross-review + live host); proven on 10G |
 | dnsmark | v2.1.3 | Stable |
 | RunPerf | v0.1.0 | Early — AF_XDP line-rate generation proven |
