@@ -63,7 +63,7 @@ XDP runs in SKB mode if the NIC doesn't support DRV mode (e.g. virtio-net). The 
 | Runbound | v0.16.9 | Stable |
 | RunX540 | v1.0.0 | Audited (8 cycles incl. cross-review + live host); proven on 10G |
 | dnsmark | v2.1.3 | Stable |
-| RunPerf | v0.2.0 | Early — AF_XDP line-rate generation proven |
+| RunPerf | v0.2.1 | Early — AF_XDP line-rate generation proven |
 
 > ⚠️ All server software is under active development and has not yet undergone external human security audit. Not recommended for production deployments handling sensitive traffic until v1.0.
 
