@@ -14,7 +14,6 @@ Every line ships in a static binary. Every release passes a structured security 
 | Project | Type | Description | License |
 |---------|------|-------------|---------|
 | [Runbound](https://github.com/redlemonbe/Runbound) | DNS server | Drop-in Unbound replacement — XDP fast-path, REST API, master/slave replication, web dashboard | AGPL-3.0 + Commercial |
-| [RunBridge](https://github.com/redlemonbe/RunBridge) | Proxmox datapath | Host-side XDP datapath for Proxmox VMs — 10 GbE line-rate VM→external, same-host VM↔VM in RAM, zero-config, no SR-IOV / passthrough | AGPL-3.0 + Commercial |
 | [dnsmark](https://github.com/redlemonbe/dnsmark) | DNS benchmark | DNS benchmark tool — UDP/TCP/DoT/DoH, percentiles, compare mode, JSON output | AGPL-3.0 |
 | [RunPerf](https://github.com/redlemonbe/RunPerf) | Network benchmark | TCP/UDP throughput & packet-rate generator — AF_XDP line-rate, per-CPU + REUSEPORT, JSON output | AGPL-3.0 |
 
@@ -60,10 +59,9 @@ XDP runs in SKB mode if the NIC doesn't support DRV mode (e.g. virtio-net). The 
 
 | Project | Version | Status |
 |---------|---------|--------|
-| Runbound | v0.16.9 | Stable |
-| RunBridge | v1.0.0 | Audited (8 cycles incl. cross-review + live host); proven on 10G |
+| Runbound | v0.19.3 | Stable — anycast, two-AI security audit cycles |
 | dnsmark | v2.1.3 | Stable |
-| RunPerf | v0.2.1 | Early — AF_XDP line-rate generation proven |
+| RunPerf | v0.3.1 | AF_XDP zero-copy generation validated at line rate |
 
 > ⚠️ All server software is under active development and has not yet undergone external human security audit. Not recommended for production deployments handling sensitive traffic until v1.0.
 
@@ -71,7 +69,7 @@ XDP runs in SKB mode if the NIC doesn't support DRV mode (e.g. virtio-net). The 
 
 ## Commercial licensing
 
-Runbound and RunBridge are dual-licensed:
+Runbound is dual-licensed:
 
 - **AGPL-3.0** — free for open-source projects, self-hosted personal use, academic research, and community distributions (Debian, Ubuntu, etc.)
 - **Commercial license** — for organizations that need to deploy without AGPL obligations (SaaS, proprietary integrations, OEM)
