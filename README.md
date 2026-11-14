@@ -1,89 +1,47 @@
-# RunASM
+# Jean-François Baudson
 
-**[www.runasm.com](https://www.runasm.com)** — high-performance infrastructure in Rust.
+**Security researcher and systems engineer** — Belgium. Known online as *RedLemonBe*.
 
-## ASM is not dead. Performance is not optional. Security is not a feature.
-
-Infrastructure software built in Rust with SIMD, XDP kernel-bypass, and near-zero-overhead abstractions.  
-Every line ships in a static binary. Every release passes a structured security audit.
-
----
-
-## The Stack
-
-| Project | Type | Description | License |
-|---------|------|-------------|---------|
-| [Runbound](https://github.com/redlemonbe/Runbound) | DNS server | Drop-in Unbound replacement — XDP fast-path, REST API, master/slave replication, web dashboard | AGPL-3.0 + Commercial |
-| [dnsmark](https://github.com/redlemonbe/dnsmark) | DNS benchmark | DNS benchmark tool — UDP/TCP/DoT/DoH, percentiles, compare mode, JSON output | AGPL-3.0 |
-| [RunPerf](https://github.com/redlemonbe/RunPerf) | Network benchmark | TCP/UDP throughput & packet-rate generator — AF_XDP line-rate, per-CPU + REUSEPORT, JSON output | AGPL-3.0 |
+I work where security and performance meet: the layer between the network card and the
+application, where a single branch, a single copy or a single unchecked length decides
+whether a system holds.
 
 ---
 
-## Design principles
+## Security research
 
-**Structured security audits** — multi-cycle reviews every release, multi-source methodology ([AI-INTERNAL] + [AI-ADVERSARIAL] + [AUTOMATED-TOOL]), findings tracked to resolution, no release without a clean audit pass.
+Independent researcher on public bug bounty programs, with published reports.
 
-**Extreme performance** — SIMD dispatch at startup (AVX2 → SSE2 → scalar), AF/XDP kernel-bypass where the NIC supports it, io_uring for zero-copy file I/O, lockless data paths on hot paths.
+I do not scan for known vulnerability classes. I look for **asymmetries in how rules are
+applied**: the check that runs on one code path and not on its twin, the limit enforced on
+the way in and forgotten on the way out, the invariant that the documentation states and
+the code never verifies. Most serious findings live there.
 
-**Drop-in compatibility** — existing `unbound.conf` files work as-is. Non-standard directives are ignored gracefully. You migrate by dropping in the binary.
+- Protocol and parser analysis: anything that reads attacker-controlled bytes
+- Authorisation and trust-boundary review
+- Reproduction first: a finding is a command and its raw output, not an opinion
 
-**Operability** — live config reload without restart, REST API on every service, built-in browser dashboard with no external dependencies, structured JSON logs, Prometheus endpoints.
+## Systems engineering
 
-**Static binaries** — musl targets ship with zero runtime dependencies. Copy the binary. Run it. Done.
+Low-level, performance-critical software, mostly in **Rust** and **assembly**.
 
----
+- Kernel-bypass networking: AF_XDP, eBPF/XDP, zero-copy datapaths
+- SIMD and cache-conscious data structures; NUMA, core and interrupt placement
+- DNS at the wire level: resolution, DNSSEC, encrypted transports
+- Linux hardening: sandboxed services, capabilities, static binaries
 
-## Architecture
+## How I work
 
-All server projects share the same fast-path design:
+- **Measure, then claim.** No performance figure without a bench, its conditions and its
+  raw data. No "fixed" without the output that shows it.
+- **Reproduce before fixing.** A defect nobody has seen is not corrected, it is guessed at.
+- **The RFC is the reference.** When behaviour is specified, the specification wins.
+- **Predictable code.** Simple structures a modern CPU can anticipate, rather than clever
+  ones that need patching.
+- **No silent debt.** What is not verified is written down as not verified.
 
-```
-Network card
-    │
-    ├─ XDP program (BPF, runs in NIC driver)
-    │      ↓
-    │   AF_XDP socket — zero-copy ring buffer
-    │      ↓
-    │   Tokio async runtime — SIMD protocol parser
-    │      ↓
-    │   In-memory engine (DNS cache / HTTP handler / SQL engine)
-    │      ↓
-    └─ Slow path fallback (standard Linux TCP/UDP stack)
-```
+## Contact
 
-XDP runs in SKB mode if the NIC doesn't support DRV mode (e.g. virtio-net). The slow path is always available as a fallback.
+**contact@runasm.com**
 
----
-
-## Status
-
-| Project | Version | Status |
-|---------|---------|--------|
-| Runbound | v0.19.3 | Stable — anycast, two-AI security audit cycles |
-| dnsmark | v2.1.3 | Stable |
-| RunPerf | v0.3.1 | AF_XDP zero-copy generation validated at line rate |
-
-> ⚠️ All server software is under active development and has not yet undergone external human security audit. Not recommended for production deployments handling sensitive traffic until v1.0.
-
----
-
-## Commercial licensing
-
-Runbound is dual-licensed:
-
-- **AGPL-3.0** — free for open-source projects, self-hosted personal use, academic research, and community distributions (Debian, Ubuntu, etc.)
-- **Commercial license** — for organizations that need to deploy without AGPL obligations (SaaS, proprietary integrations, OEM)
-
-Contact: **contact@runasm.com** · [www.runasm.com](https://www.runasm.com)
-
-dnsmark and RunPerf are AGPL-3.0 only — no commercial license needed for benchmark tools.
-
----
-
-## Support the project
-[![GitHub Sponsors](https://img.shields.io/github/sponsors/redlemonbe?style=flat&logo=github&label=Sponsor)](https://github.com/sponsors/redlemonbe)
-
-**Bitcoin** — `3FP8hkkiu4kwCD1PDFgAv2oq1ZTyXwy3yy`  
-**Ethereum** — `0xB5eEAf89edA4204Aa9305B068b37A93439cBb680`
-
----
+Security reports and professional enquiries are welcome. I answer in French or English.
